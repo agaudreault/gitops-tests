@@ -1,0 +1,63 @@
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: dev-1  
+  labels:
+    kubernetes.io/service-name: dev
+addressType: IPv4
+ports:
+  - name: 'https' 
+    appProtocol: https
+    protocol: TCP
+    port: 6443
+endpoints:
+  - addresses:
+      - "10.96.0.1" 
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: staging-1
+  labels:
+    kubernetes.io/service-name: staging
+addressType: IPv4
+ports:
+  - name: 'https' 
+    appProtocol: https
+    protocol: TCP
+    port: 6443
+endpoints:
+  - addresses:
+      - "10.96.0.1" 
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: production-1-1  
+  labels:
+    kubernetes.io/service-name: production-1
+addressType: IPv4
+ports:
+  - name: 'https' 
+    appProtocol: https
+    protocol: TCP
+    port: 6443
+endpoints:
+  - addresses:
+      - "10.96.0.1" 
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: production-2-1  
+  labels:
+    kubernetes.io/service-name: production-2
+addressType: IPv4
+ports:
+  - name: 'https' 
+    appProtocol: https
+    protocol: TCP
+    port: 6443
+endpoints:
+  - addresses:
+      - "10.96.0.1" 
