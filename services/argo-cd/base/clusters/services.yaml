@@ -3,49 +3,29 @@ kind: Service
 metadata:
   name: dev
 spec:
-  type: ClusterIP
-  clusterIP: None
-  ports:
-    - name: https
-      port: 443
-      protocol: TCP 
-      targetPort: 6443
+  type: ExternalName
+  externalName: kubernetes.default.svc
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: staging
 spec:
-  type: ClusterIP
-  clusterIP: None
-  ports:
-    - name: https
-      port: 443
-      protocol: TCP 
-      targetPort: 6443
+  type: ExternalName
+  externalName: kubernetes.default.svc
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: production-1
 spec:
-  type: ClusterIP
-  clusterIP: None
-  ports:
-    - name: https
-      port: 443
-      protocol: TCP 
-      targetPort: 6443
+  type: ExternalName
+  externalName: kubernetes.default.svc
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: production-2
 spec:
-  type: ClusterIP
-  clusterIP: None
-  ports:
-    - name: https
-      port: 443
-      protocol: TCP 
-      targetPort: 6443
+  type: ExternalName
+  externalName: kubernetes.default.svc

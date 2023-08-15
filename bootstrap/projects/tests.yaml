@@ -7,7 +7,7 @@ metadata:
     argocd.argoproj.io/project-inherit: global
 spec:
   description: Project for the test services
-  # In this scenario, everything runs in the lopcal cluster. Simulate different cluster by having different namespaces
+  # In this scenario, everything runs in the local cluster. Simulate different cluster by having different namespaces
   destinations:
     - namespace: 'dev'
       name: 'dev'
@@ -17,3 +17,5 @@ spec:
       name: 'production-1'
     - namespace: 'production-2'
       name: 'production-2'
+  sourceRepos:
+    - '*'

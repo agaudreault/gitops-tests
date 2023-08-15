@@ -14,8 +14,8 @@ stringData:
     {
       "tlsClientConfig": {
         "insecure": true,
-        "certData": "<REDACTED>",
-        "keyData": "<REDACTED>"
+        "certData": "<CERT_DATA>",
+        "keyData": "<KEY_DATA>"
       }
     }
 ---
@@ -30,14 +30,15 @@ metadata:
 type: Opaque
 stringData:
   name: dev
-  server: https://kubernetes.default.svc
+  server: https://dev.argocd.svc
   namespaces: dev
   config: |
     {
+      "bearerToken": "<TOKEN>",
       "tlsClientConfig": {
         "insecure": true,
-        "certData": "<REDACTED>",
-        "keyData": "<REDACTED>"
+        "certData": "<CERT_DATA>",
+        "keyData": "<KEY_DATA>"
       }
     }
 ---
@@ -52,14 +53,15 @@ metadata:
 type: Opaque
 stringData:
   name: staging
-  server: https://kubernetes.default.svc
+  server: https://staging.argocd.svc
   namespaces: staging
   config: |
     {
+      "bearerToken": "<TOKEN>",
       "tlsClientConfig": {
         "insecure": true,
-        "certData": "<REDACTED>",
-        "keyData": "<REDACTED>"
+        "certData": "<CERT_DATA>",
+        "keyData": "<KEY_DATA>"
       }
     }
 ---
@@ -74,14 +76,15 @@ metadata:
 type: Opaque
 stringData:
   name: production-1
-  server: https://kubernetes.default.svc
+  server: https://production-1.argocd.svc
   namespaces: production-1
   config: |
     {
+      "bearerToken": "<TOKEN>",
       "tlsClientConfig": {
         "insecure": true,
-        "certData": "<REDACTED>",
-        "keyData": "<REDACTED>"
+        "certData": "<CERT_DATA>",
+        "keyData": "<KEY_DATA>"
       }
     }
 
@@ -97,13 +100,14 @@ metadata:
 type: Opaque
 stringData:
   name: production-2
-  server: https://kubernetes.default.svc
+  server: https://production-2.argocd.svc
   namespaces: production-2
   config: |
     {
+      "bearerToken": "<TOKEN>",
       "tlsClientConfig": {
         "insecure": true,
-        "certData": "<REDACTED>",
-        "keyData": "<REDACTED>"
+        "certData": "<CERT_DATA>",
+        "keyData": "<KEY_DATA>"
       }
     }
