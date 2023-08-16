@@ -8,6 +8,9 @@ metadata:
 spec:
   syncPolicy:
     preserveResourcesOnDeletion: false
+  strategyRef:
+    name: gradual-environments
+    kind: SyncStrategy
   generators:
     - clusters:
         selector:
