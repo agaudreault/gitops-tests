@@ -34,6 +34,8 @@ spec:
       name: 'tests.simple-application.{{name}}'
       annotations:
         argocd.argoproj.io/manifest-generate-paths: .;../values.yaml;
+      labels: 
+        cluster: '{{name}}'
     spec:
       destination:
         namespace: '{{metadata.labels.fake-ns}}'
