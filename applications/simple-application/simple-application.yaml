@@ -51,7 +51,6 @@ spec:
             - 'values.yaml'
             - 'values-{{name}}.yaml'
       syncPolicy:
-        automated: {}
         syncOptions:
           - FailOnSharedResource=true
           - ApplyOutOfSyncOnly=false
