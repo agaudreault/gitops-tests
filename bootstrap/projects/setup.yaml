@@ -13,3 +13,6 @@ spec:
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
+  sourceRepos:
+    - 'https://github.com/agaudreault-jive/gitops-tests'
+

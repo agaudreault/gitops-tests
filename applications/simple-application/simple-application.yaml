@@ -9,7 +9,7 @@ spec:
   syncPolicy:
     preserveResourcesOnDeletion: false
   strategyRef:
-    name: gradual-environments
+    name: doesnotexist
     kind: SyncStrategy
   generators:
     - clusters:
