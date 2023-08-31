@@ -18,7 +18,7 @@ spec:
   source:
     path: bootstrap/projects/
     repoURL: https://github.com/agaudreault-jive/gitops-tests
-    targetRevision: main
+    targetRevision: sync-strategy 
     directory:
       recurse: true
   syncPolicy:
