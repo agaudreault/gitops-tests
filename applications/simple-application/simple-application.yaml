@@ -9,8 +9,8 @@ spec:
   syncPolicy:
     preserveResourcesOnDeletion: false
   strategyRef:
-    name: doesnotexist
-    kind: SyncStrategy
+    name: clusterwide-strategy
+    kind: ClusterSyncStrategy
   generators:
     - clusters:
         selector:
