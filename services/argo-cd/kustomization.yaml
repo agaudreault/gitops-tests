@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
   - https://github.com/argoproj/argo-cd//manifests/cluster-install/?ref=master
-  - ./base
 
 patchesStrategicMerge:
   - ./patch/config/argocd-cm.yaml
