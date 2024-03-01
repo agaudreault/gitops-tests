@@ -1,1 +1,2 @@
 nameOverride: 'multi-source'
+replicaCount: 0
