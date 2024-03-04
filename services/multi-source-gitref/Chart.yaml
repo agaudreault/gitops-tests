@@ -1,0 +1,8 @@
+apiVersion: v2
+name: multi-source-gitref
+version: 1.0.0
+dependencies:
+  - name: hello-world
+    version: 0.1.0
+    repository: https://helm.github.io/examples
+    alias: app

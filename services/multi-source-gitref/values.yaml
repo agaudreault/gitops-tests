@@ -1,0 +1,3 @@
+app:
+  nameOverride: 'invalid'
+  replicaCount: 5
