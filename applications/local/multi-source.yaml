@@ -1,0 +1,65 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: multi-source-git
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+spec:
+  destination:
+    namespace: dev
+    name: dev
+  project: tests
+  sources:
+    - path: services/multi-source
+      repoURL: https://github.com/agaudreault/gitops-tests
+      targetRevision: test-sync
+    - repoURL: https://github.com/agaudreault/gitops-tests
+      path: services/multi-source
+      targetRevision: test-sync-2
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: multi-source-helmref
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+spec:
+  destination:
+    namespace: dev
+    name: dev
+  project: tests
+  sources:
+    - repoURL: https://helm.github.io/examples
+      path: whatever
+      chart: hello-world
+      targetRevision: 0.1.0
+      helm:
+        valueFiles:
+          - '$gitops-test/services/multi-source-ref/values.yaml'
+    - repoURL: https://github.com/agaudreault/gitops-tests
+      targetRevision: test-sync
+      path: services/multi-source-with-ref
+      ref: gitops-test
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: multi-source-gitref
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+spec:
+  destination:
+    namespace: dev
+    name: dev
+  project: tests
+  sources:
+    - repoURL: https://github.com/agaudreault/gitops-tests
+      path: services/multi-source-gitref
+      targetRevision: test-sync
+      helm:
+        valueFiles:
+          - '$gitops-test/services/multi-source-ref/values-app.yaml'
+    - repoURL: https://github.com/agaudreault/gitops-tests
+      targetRevision: test-sync
+      path: services/multi-source-with-gitref
+      ref: gitops-test
