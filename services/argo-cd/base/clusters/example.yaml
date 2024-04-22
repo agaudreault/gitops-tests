@@ -9,7 +9,7 @@ type: Opaque
 stringData:
   name: in-cluster
   server: https://kubernetes.default.svc
-  namespaces: argocd
+  namespaces: argocd,argo-rollouts
   clusterResources: 'true'
   config: |
     {

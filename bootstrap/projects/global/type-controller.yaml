@@ -9,5 +9,8 @@ spec:
   namespaceResourceWhitelist:
     - group: '*'
       kind: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
   sourceRepos:
     - 'https://github.com/agaudreault/gitops-tests'
