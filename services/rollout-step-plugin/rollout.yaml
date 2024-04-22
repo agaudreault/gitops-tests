@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: step-plugin-test
+spec:
+  progressDeadlineSeconds: 120
+  replicas: 5
+  selector:
+    matchLabels:
+      app: step-plugin-test
+  strategy:
+    canary:
+      steps:
+        - setWeight: 40
+        - pause: {}
+        - plugin:
+            name: step/e2e-test
+            config:
+              return: Successful
+        - pause: {}
+        - plugin:
+            name: step/e2e-test
+            config:
+              return: Running
+              requeue: 20s
+        - pause: {}
+        - plugin:
+            name: step/e2e-test-disabled
+            config:
+              return: Running
+        - setWeight: 60
+        - pause: {}
+        - plugin:
+            name: step/e2e-test
+            config:
+              return: invalid-state
+        - pause: {}
+        - plugin:
+            name: step/e2e-test
+            config:
+              return: Failed
+  template:
+    metadata:
+      labels:
+        app: step-plugin-test
+    spec:
+      containers:
+        - name: basic
+          image: nginx:1.19-alpine
+          resources:
+            requests:
+              memory: 16Mi
+              cpu: 1m
