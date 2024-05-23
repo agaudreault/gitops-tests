@@ -1,0 +1,9 @@
+helm:
+  namespace: production-2
+  releaseName: simple-app-east
+  ignoreMissingValueFiles: true
+  valueFiles:
+    - '../values.yaml'
+    - 'values.yaml'
+    - 'values-east.yaml'
+    - 'values-production-2.yaml'

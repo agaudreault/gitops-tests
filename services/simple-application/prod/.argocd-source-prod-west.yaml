@@ -1,0 +1,9 @@
+helm:
+  namespace: production-1
+  releaseName: simple-app-west
+  ignoreMissingValueFiles: true
+  valueFiles:
+    - '../values.yaml'
+    - 'values.yaml'
+    - 'values-west.yaml'
+    - 'values-production-1.yaml'

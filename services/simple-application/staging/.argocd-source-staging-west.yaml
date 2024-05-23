@@ -1,0 +1,9 @@
+helm:
+  namespace: staging
+  releaseName: simple-app-west
+  ignoreMissingValueFiles: true
+  valueFiles:
+    - '../values.yaml'
+    - 'values.yaml'
+    - 'values-west.yaml'
+    - 'values-staging.yaml'

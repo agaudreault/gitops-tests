@@ -1,0 +1,9 @@
+helm:
+  namespace: staging
+  releaseName: simple-app-east
+  ignoreMissingValueFiles: true
+  valueFiles:
+    - '../values.yaml'
+    - 'values.yaml'
+    - 'values-east.yaml'
+    - 'values-staging.yaml'
