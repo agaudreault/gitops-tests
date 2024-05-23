@@ -3,50 +3,50 @@ automountServiceAccountToken: false
 kind: ServiceAccount
 metadata:
   annotations:
-    argocd.argoproj.io/tracking-id: dev-west:/ServiceAccount:default/dev-west-mariadb
+    argocd.argoproj.io/tracking-id: dev-west:/ServiceAccount:dev/simple-app-west-mariadb
   labels:
     app.kubernetes.io/instance: dev-west
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mariadb
     helm.sh/chart: mariadb-13.0.1
-  name: dev-west-mariadb
-  namespace: default
+  name: simple-app-west-mariadb
+  namespace: dev
 
 ---
 
 apiVersion: v1
 data:
-  mariadb-password: MVd4d29jQzVxRg==
-  mariadb-root-password: TTZWRkthQWViTA==
+  mariadb-password: TTVzRFdEb2xkVw==
+  mariadb-root-password: dHlYMXQ3MTlUdg==
 kind: Secret
 metadata:
   annotations:
-    argocd.argoproj.io/tracking-id: dev-west:/Secret:default/dev-west-mariadb
+    argocd.argoproj.io/tracking-id: dev-west:/Secret:dev/simple-app-west-mariadb
   labels:
     app.kubernetes.io/instance: dev-west
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mariadb
     helm.sh/chart: mariadb-13.0.1
-  name: dev-west-mariadb
-  namespace: default
+  name: simple-app-west-mariadb
+  namespace: dev
 type: Opaque
 
 ---
 
 apiVersion: v1
 data:
-  wordpress-password: R0FnVUVLQ2hKNg==
+  wordpress-password: cEVNdDdXWXFkNQ==
 kind: Secret
 metadata:
   annotations:
-    argocd.argoproj.io/tracking-id: dev-west:/Secret:default/dev-west-app
+    argocd.argoproj.io/tracking-id: dev-west:/Secret:dev/simple-app-west
   labels:
     app.kubernetes.io/instance: dev-west
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: app
     helm.sh/chart: app-17.0.5
-  name: dev-west-app
-  namespace: default
+  name: simple-app-west
+  namespace: dev
 type: Opaque
 
 ---
@@ -85,15 +85,15 @@ data:
 kind: ConfigMap
 metadata:
   annotations:
-    argocd.argoproj.io/tracking-id: dev-west:/ConfigMap:default/dev-west-mariadb
+    argocd.argoproj.io/tracking-id: dev-west:/ConfigMap:dev/simple-app-west-mariadb
   labels:
     app.kubernetes.io/component: primary
     app.kubernetes.io/instance: dev-west
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mariadb
     helm.sh/chart: mariadb-13.0.1
-  name: dev-west-mariadb
-  namespace: default
+  name: simple-app-west-mariadb
+  namespace: dev
 
 ---
 
@@ -101,14 +101,14 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   annotations:
-    argocd.argoproj.io/tracking-id: dev-west:/PersistentVolumeClaim:default/dev-west-app
+    argocd.argoproj.io/tracking-id: dev-west:/PersistentVolumeClaim:dev/simple-app-west
   labels:
     app.kubernetes.io/instance: dev-west
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: app
     helm.sh/chart: app-17.0.5
-  name: dev-west-app
-  namespace: default
+  name: simple-app-west
+  namespace: dev
 spec:
   accessModes:
   - ReadWriteOnce
@@ -122,15 +122,15 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    argocd.argoproj.io/tracking-id: dev-west:/Service:default/dev-west-mariadb
+    argocd.argoproj.io/tracking-id: dev-west:/Service:dev/simple-app-west-mariadb
   labels:
     app.kubernetes.io/component: primary
     app.kubernetes.io/instance: dev-west
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mariadb
     helm.sh/chart: mariadb-13.0.1
-  name: dev-west-mariadb
-  namespace: default
+  name: simple-app-west-mariadb
+  namespace: dev
 spec:
   ports:
   - name: mysql
@@ -140,7 +140,7 @@ spec:
     targetPort: mysql
   selector:
     app.kubernetes.io/component: primary
-    app.kubernetes.io/instance: dev-west
+    app.kubernetes.io/instance: simple-app-west
     app.kubernetes.io/name: mariadb
   sessionAffinity: None
   type: ClusterIP
@@ -151,30 +151,31 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    argocd.argoproj.io/tracking-id: dev-west:/Service:default/dev-west-app
+    argocd.argoproj.io/tracking-id: dev-west:/Service:dev/simple-app-west
   labels:
     app.kubernetes.io/instance: dev-west
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: app
     helm.sh/chart: app-17.0.5
-  name: dev-west-app
-  namespace: default
+  name: simple-app-west
+  namespace: dev
 spec:
-  externalTrafficPolicy: Cluster
   ports:
   - name: http
+    nodePort: null
     port: 80
     protocol: TCP
     targetPort: http
   - name: https
+    nodePort: null
     port: 443
     protocol: TCP
     targetPort: https
   selector:
-    app.kubernetes.io/instance: dev-west
+    app.kubernetes.io/instance: simple-app-west
     app.kubernetes.io/name: app
   sessionAffinity: None
-  type: LoadBalancer
+  type: ClusterIP
 
 ---
 
@@ -182,26 +183,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    argocd.argoproj.io/tracking-id: dev-west:apps/Deployment:default/dev-west-app
+    argocd.argoproj.io/tracking-id: dev-west:apps/Deployment:dev/simple-app-west
   labels:
     app.kubernetes.io/instance: dev-west
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: app
     helm.sh/chart: app-17.0.5
-  name: dev-west-app
-  namespace: default
+  name: simple-app-west
+  namespace: dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/instance: dev-west
+      app.kubernetes.io/instance: simple-app-west
       app.kubernetes.io/name: app
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app.kubernetes.io/instance: dev-west
+        app.kubernetes.io/instance: simple-app-west
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: app
         helm.sh/chart: app-17.0.5
@@ -214,7 +215,7 @@ spec:
           - podAffinityTerm:
               labelSelector:
                 matchLabels:
-                  app.kubernetes.io/instance: dev-west
+                  app.kubernetes.io/instance: simple-app-west
                   app.kubernetes.io/name: app
               topologyKey: kubernetes.io/hostname
             weight: 1
@@ -225,7 +226,7 @@ spec:
         - name: ALLOW_EMPTY_PASSWORD
           value: "yes"
         - name: MARIADB_HOST
-          value: dev-west-mariadb
+          value: simple-app-west-mariadb
         - name: MARIADB_PORT_NUMBER
           value: "3306"
         - name: WORDPRESS_DATABASE_NAME
@@ -236,14 +237,14 @@ spec:
           valueFrom:
             secretKeyRef:
               key: mariadb-password
-              name: dev-west-mariadb
+              name: simple-app-west-mariadb
         - name: WORDPRESS_USERNAME
           value: user
         - name: WORDPRESS_PASSWORD
           valueFrom:
             secretKeyRef:
               key: wordpress-password
-              name: dev-west-app
+              name: simple-app-west
         - name: WORDPRESS_EMAIL
           value: user@example.com
         - name: WORDPRESS_FIRST_NAME
@@ -330,7 +331,7 @@ spec:
       volumes:
       - name: wordpress-data
         persistentVolumeClaim:
-          claimName: dev-west-app
+          claimName: simple-app-west
 
 ---
 
@@ -338,31 +339,31 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   annotations:
-    argocd.argoproj.io/tracking-id: dev-west:apps/StatefulSet:default/dev-west-mariadb
+    argocd.argoproj.io/tracking-id: dev-west:apps/StatefulSet:dev/simple-app-west-mariadb
   labels:
     app.kubernetes.io/component: primary
     app.kubernetes.io/instance: dev-west
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mariadb
     helm.sh/chart: mariadb-13.0.1
-  name: dev-west-mariadb
-  namespace: default
+  name: simple-app-west-mariadb
+  namespace: dev
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
       app.kubernetes.io/component: primary
-      app.kubernetes.io/instance: dev-west
+      app.kubernetes.io/instance: simple-app-west
       app.kubernetes.io/name: mariadb
-  serviceName: dev-west-mariadb
+  serviceName: simple-app-west-mariadb
   template:
     metadata:
       annotations:
-        checksum/configuration: c820ba10d16656fc63921f936359d597a752a872d2093d14bd8f733192f16073
+        checksum/configuration: 24811fed6e3d9f217d003ea864fb2849ddd2515ab6ccbf5b0769141dd997f786
       labels:
         app.kubernetes.io/component: primary
-        app.kubernetes.io/instance: dev-west
+        app.kubernetes.io/instance: simple-app-west
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: mariadb
         helm.sh/chart: mariadb-13.0.1
@@ -376,7 +377,7 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/component: primary
-                  app.kubernetes.io/instance: dev-west
+                  app.kubernetes.io/instance: simple-app-west
                   app.kubernetes.io/name: mariadb
               topologyKey: kubernetes.io/hostname
             weight: 1
@@ -388,14 +389,14 @@ spec:
           valueFrom:
             secretKeyRef:
               key: mariadb-root-password
-              name: dev-west-mariadb
+              name: simple-app-west-mariadb
         - name: MARIADB_USER
           value: bn_wordpress
         - name: MARIADB_PASSWORD
           valueFrom:
             secretKeyRef:
               key: mariadb-password
-              name: dev-west-mariadb
+              name: simple-app-west-mariadb
         - name: MARIADB_DATABASE
           value: bitnami_wordpress
         image: docker.io/bitnami/mariadb:11.0.2-debian-11-r2
@@ -452,10 +453,10 @@ spec:
           subPath: my.cnf
       securityContext:
         fsGroup: 1001
-      serviceAccountName: dev-west-mariadb
+      serviceAccountName: simple-app-west-mariadb
       volumes:
       - configMap:
-          name: dev-west-mariadb
+          name: simple-app-west-mariadb
         name: config
   updateStrategy:
     type: RollingUpdate
@@ -463,7 +464,7 @@ spec:
   - metadata:
       labels:
         app.kubernetes.io/component: primary
-        app.kubernetes.io/instance: dev-west
+        app.kubernetes.io/instance: simple-app-west
         app.kubernetes.io/name: mariadb
       name: data
     spec:
