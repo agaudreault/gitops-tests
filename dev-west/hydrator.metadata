@@ -1,5 +1,8 @@
 {
-  "commands": null,
+  "commands": [
+    "helm dependency build",
+    "helm template . --name-template simple-app-west --namespace dev --values /tmp/_argocd-repo/dbb92269-9c18-47ad-b229-ae14b41dd16e/services/simple-application/values.yaml --values /tmp/_argocd-repo/dbb92269-9c18-47ad-b229-ae14b41dd16e/services/simple-application/dev/values.yaml --include-crds"
+  ],
   "repoURL": "https://github.com/agaudreault/gitops-tests",
-  "drySha": "61d5c337ea259389cc3ebfa0e449317a3517be42"
+  "drySha": "ca2ff0b38fae3dd02444d3615651129f1e394aba"
 }
