@@ -1,5 +1,8 @@
 {
-  "commands": null,
+  "commands": [
+    "helm dependency build",
+    "helm template . --name-template dev-west --include-crds"
+  ],
   "repoURL": "https://github.com/agaudreault/gitops-tests",
   "drySha": "61d5c337ea259389cc3ebfa0e449317a3517be42"
 }
