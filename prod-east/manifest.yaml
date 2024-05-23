@@ -16,8 +16,8 @@ metadata:
 
 apiVersion: v1
 data:
-  mariadb-password: SDdMN3pRSUV0MQ==
-  mariadb-root-password: M0JNMGdFMU9HbQ==
+  mariadb-password: V3hSTVRjcU51bg==
+  mariadb-root-password: SFFvUURFTmh4Sw==
 kind: Secret
 metadata:
   annotations:
@@ -35,7 +35,7 @@ type: Opaque
 
 apiVersion: v1
 data:
-  wordpress-password: S0J5OG10UlBoUw==
+  wordpress-password: VDZmRzJMQ21RVg==
 kind: Secret
 metadata:
   annotations:
