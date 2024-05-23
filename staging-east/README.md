@@ -7,7 +7,7 @@ To hydrate the manifests in this repository, run the following commands:
 
 git clone https://github.com/agaudreault/gitops-tests
 # cd into the cloned directory
-git checkout 61d5c337ea259389cc3ebfa0e449317a3517be42
+git checkout ca2ff0b38fae3dd02444d3615651129f1e394aba
 helm dependency build
-helm template . --name-template staging-east --include-crds
+helm template . --name-template simple-app-east --namespace staging --values /tmp/_argocd-repo/dbb92269-9c18-47ad-b229-ae14b41dd16e/services/simple-application/values.yaml --values /tmp/_argocd-repo/dbb92269-9c18-47ad-b229-ae14b41dd16e/services/simple-application/staging/values.yaml --include-crds
 ```
