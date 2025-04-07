@@ -27,6 +27,9 @@ spec:
         path: services/k8sgpt
         repoURL: https://github.com/agaudreault/gitops-tests
         targetRevision: k8sgpt
+        helm:
+          releaseName: k8sgpt-operator
+          ignoreMissingValueFiles: true
       syncPolicy:
         automated:
           prune: true
