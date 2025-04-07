@@ -4,14 +4,11 @@ metadata:
   name: k8sgpt-argocd
 spec:
   ai:
-    enabled: false
-    # model: gpt-4o-mini
-    backend: localai
-    # secret:
-    #   name: k8sgpt-sample-secret
-    #   key: openai-api-key
-    # anonymized: false
-    # language: english
+    enabled: true
+    model: gpt-4o-mini
+    backend: openai
+    anonymized: true
+    language: english
   noCache: true
   version: v0.4.5
   resources:
