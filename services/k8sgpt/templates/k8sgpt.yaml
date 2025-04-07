@@ -1,0 +1,27 @@
+apiVersion: core.k8sgpt.ai/v1alpha1
+kind: K8sGPT
+metadata:
+  name: k8sgpt-argocd
+spec:
+  ai:
+    enabled: false
+    # model: gpt-4o-mini
+    backend: localai
+    # secret:
+    #   name: k8sgpt-sample-secret
+    #   key: openai-api-key
+    # anonymized: false
+    # language: english
+  noCache: true
+  version: v0.4.5
+  resources:
+    requests: {}
+    limits: {}
+  # filters:
+  #   - Ingress
+  # sink:
+  #   type: slack
+  #   webhook: <webhook-url>
+  # extraOptions:
+  #   backstage:
+  #     enabled: true

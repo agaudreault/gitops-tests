@@ -4,7 +4,7 @@ app:
   #   enabled: false
 
   serviceMonitor:
-    enabled: true
+    enabled: false
   #   additionalLabels: {}
   #   # The namespace where Prometheus expects to find the serviceMonitor
   #   # namespace: ""
