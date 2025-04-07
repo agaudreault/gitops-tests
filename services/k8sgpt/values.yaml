@@ -1,16 +1,15 @@
 app:
-  {}
   ## Optional enable distributed cache
   # interplex:
   #   enabled: false
 
-  # serviceMonitor:
-  #   enabled: false
+  serviceMonitor:
+    enabled: true
   #   additionalLabels: {}
   #   # The namespace where Prometheus expects to find the serviceMonitor
   #   # namespace: ""
-  # grafanaDashboard:
-  #   enabled: false
+  grafanaDashboard:
+    enabled: true
   #   # The namespace where Grafana expects to find the dashboard
   #   # namespace: ""
   #   folder:
