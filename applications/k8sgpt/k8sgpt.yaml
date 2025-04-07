@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: k8sgpt
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: false
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            name: in-cluster
+  template:
+    metadata:
+      name: 'k8sgpt.{{name}}'
+      annotations:
+        argocd.argoproj.io/manifest-generate-paths: .
+    spec:
+      destination:
+        namespace: k8sgpt-operator-system
+        name: '{{name}}'
+      project: controller
+      source:
+        path: services/k8sgpt
+        repoURL: https://github.com/agaudreault/gitops-tests
+        targetRevision: k8sgpt
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - FailOnSharedResource=true
+          - ApplyOutOfSyncOnly=false
+          # - RespectIgnoreDifferences=true ## Ignore labels and annotations from diff in case we apply manually
+      ignoreDifferences:
+        - group: '*'
+          kind: '*'
+          jsonPointers:
+            - /metadata/labels
+            - /metadata/annotations
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/syncPolicy ## Allow to disable sync for ArgoCD in the UI
