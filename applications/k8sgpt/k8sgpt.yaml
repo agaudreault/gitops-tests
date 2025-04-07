@@ -28,7 +28,7 @@ spec:
         repoURL: https://github.com/agaudreault/gitops-tests
         targetRevision: k8sgpt
         helm:
-          releaseName: k8sgpt-operator
+          releaseName: k8sgpt
           ignoreMissingValueFiles: true
       syncPolicy:
         automated:
