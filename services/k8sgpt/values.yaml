@@ -9,7 +9,7 @@ app:
   #   # The namespace where Prometheus expects to find the serviceMonitor
   #   # namespace: ""
   grafanaDashboard:
-    enabled: true
+    enabled: false
   #   # The namespace where Grafana expects to find the dashboard
   #   # namespace: ""
   #   folder:
