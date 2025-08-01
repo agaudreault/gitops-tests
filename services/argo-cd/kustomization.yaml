@@ -12,4 +12,57 @@ patches:
 
 images:
   - name: quay.io/argoproj/argocd
-    newTag: v2.10.7
+    newTag: v3.0.12
+
+# Update pull policy to IfNotPresent for kind cluster and private registries
+configMapGenerator:
+  - name: replacement-config
+    options:
+      disableNameSuffixHash: true
+    literals:
+      - imagePullPolicy=IfNotPresent
+
+replacements:
+  - source:
+      kind: ConfigMap
+      name: replacement-config
+      fieldPath: data.imagePullPolicy
+    targets:
+      - select:
+          group: apps
+          kind: Deployment
+        options:
+          create: true
+        fieldPaths:
+          - spec.template.spec.containers.*.imagePullPolicy
+      - select:
+          group: apps
+          kind: Deployment
+          name: argocd-dex-server
+        options:
+          create: true
+        fieldPaths:
+          - spec.template.spec.initContainers.*.imagePullPolicy
+      - select:
+          group: apps
+          kind: Deployment
+          name: argocd-repo-server
+        options:
+          create: true
+        fieldPaths:
+          - spec.template.spec.initContainers.*.imagePullPolicy
+      - select:
+          group: apps
+          kind: Deployment
+          name: argocd-redis
+        options:
+          create: true
+        fieldPaths:
+          - spec.template.spec.initContainers.*.imagePullPolicy
+      - select:
+          group: apps
+          kind: StatefulSet
+        options:
+          create: true
+        fieldPaths:
+          - spec.template.spec.containers.*.imagePullPolicy
