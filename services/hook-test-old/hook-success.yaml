@@ -1,19 +1,18 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: bad-hook-fail
+  name: hook-success
   annotations:
     argocd.argoproj.io/hook: PreSync
-    # argocd.argoproj.io/hook-delete-policy: HookSucceeded
-    argocd.argoproj.io/hook-delete-policy: HookFailed
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    # argocd.argoproj.io/hook-delete-policy: HookFailed
     # argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
-    argocd.argoproj.io/sync-options: Replace=true
+    # argocd.argoproj.io/sync-options: Force=true,Replace=true
 spec:
-  backoffLimit: 0
   template:
     spec:
       restartPolicy: Never
       containers:
         - name: main
           image: busybox
-          command: ['sh', '-c', "echo 'hello' && sleep 20 && exit 1"]
+          command: ['sh', '-c', "echo 'hello' && sleep 20"]
