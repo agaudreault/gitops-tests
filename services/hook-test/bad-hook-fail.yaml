@@ -9,6 +9,7 @@ metadata:
     # argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
     # argocd.argoproj.io/sync-options: Force=true,Replace=true
 spec:
+  backoffLimit: 0
   template:
     spec:
       restartPolicy: Never
