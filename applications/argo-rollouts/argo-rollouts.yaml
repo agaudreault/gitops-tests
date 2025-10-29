@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argo-rollouts
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: false
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            name: in-cluster
+  template:
+    metadata:
+      name: 'argo-rollouts.{{name}}'
+      annotations:
+        argocd.argoproj.io/manifest-generate-paths: .
+    spec:
+      destination:
+        namespace: argo-rollouts
+        name: '{{name}}'
+      project: controller
+      source:
+        path: services/argo-rollouts
+        repoURL: https://github.com/agaudreault/gitops-tests
+        targetRevision: main
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - FailOnSharedResource=true
+          - ApplyOutOfSyncOnly=false
+          # - RespectIgnoreDifferences=true ## Ignore labels and annotations from diff in case we apply manually
+      ignoreDifferences:
+        - group: '*'
+          kind: '*'
+          jsonPointers:
+            - /metadata/labels
+            - /metadata/annotations
+        # See https://github.com/argoproj/argo-rollouts/blob/master/CHANGELOG-v0.1.0_v1.1.0.md#argo-cd-outofsync-status-on-rollout-v100-crds
+        - group: apiextensions.k8s.io
+          kind: CustomResourceDefinition
+          jsonPointers:
+            - /spec/preserveUnknownFields
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/syncPolicy ## Allow to disable sync for ArgoCD in the UI

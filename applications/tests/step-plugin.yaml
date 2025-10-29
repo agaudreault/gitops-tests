@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: step-plugin
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+spec:
+  destination:
+    namespace: dev
+    name: dev
+  project: tests
+  source:
+    path: services/rollout-step-plugin
+    repoURL: https://github.com/agaudreault/gitops-tests
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
