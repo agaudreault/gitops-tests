@@ -45,4 +45,5 @@ spec:
             - /metadata/annotations
   ignoreApplicationDifferences:
     - jsonPointers:
-        - /spec/syncPolicy ## Allow to disable/enable sync for ArgoCD in the UI
+        - /spec/source/targetRevision ## Allow to change revision to another branch in the UI
+        - /spec/syncPolicy ## Allow to disable sync in the UI

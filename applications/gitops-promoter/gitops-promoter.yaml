@@ -39,4 +39,5 @@ spec:
           # - RespectIgnoreDifferences=true ## Ignore labels and annotations from diff in case we apply manually
   ignoreApplicationDifferences:
     - jsonPointers:
-        - /spec/syncPolicy ## Allow to disable sync for ArgoCD in the UI
+        - /spec/source/targetRevision ## Allow to change revision to another branch in the UI
+        - /spec/syncPolicy ## Allow to disable sync in the UI

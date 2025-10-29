@@ -27,3 +27,9 @@ spec:
       - FailOnSharedResource=true
       - ApplyOutOfSyncOnly=false
       - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: argoproj.io
+      kind: Application
+      jsonPointers:
+        - /spec/source/targetRevision ## Allow to change revision to another branch in the UI
+        - /spec/syncPolicy ## Allow to disable sync in the UI
