@@ -33,6 +33,7 @@ spec:
           prune: true
           selfHeal: true
         syncOptions:
+          - CreateNamespace=true
           - FailOnSharedResource=true
           - ApplyOutOfSyncOnly=false
           # - RespectIgnoreDifferences=true ## Ignore labels and annotations from diff in case we apply manually
