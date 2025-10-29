@@ -16,13 +16,13 @@ spec:
             name: in-cluster
   template:
     metadata:
-      name: "argo-cd.{{name}}"
+      name: 'argo-cd.{{name}}'
       annotations:
         argocd.argoproj.io/manifest-generate-paths: .
     spec:
       destination:
         namespace: argocd
-        name: "{{name}}"
+        name: '{{name}}'
       project: setup
       source:
         path: services/argo-cd
@@ -30,6 +30,7 @@ spec:
         targetRevision: HEAD
       syncPolicy:
         automated:
+          enabled: false
           prune: true
           selfHeal: true
         syncOptions:
@@ -37,11 +38,11 @@ spec:
           - ApplyOutOfSyncOnly=false
           # - RespectIgnoreDifferences=true ## Ignore labels and annotations from diff in case we apply manually
       ignoreDifferences:
-        - group: "*"
-          kind: "*"
+        - group: '*'
+          kind: '*'
           jsonPointers:
             - /metadata/labels
             - /metadata/annotations
   ignoreApplicationDifferences:
     - jsonPointers:
-        - /spec/syncPolicy ## Allow to disable sync for ArgoCD in the UI
+        - /spec/syncPolicy ## Allow to disable/enable sync for ArgoCD in the UI
