@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: post-bad-hook-fail
+  annotations:
+    argocd.argoproj.io/hook: SyncFail
+    # argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/hook-delete-policy: HookFailed
+    # argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-options: Replace=true, Force=true
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox
+          command: ['sh', '-c', "echo 'hello' && sleep 20 && exit 1"]
