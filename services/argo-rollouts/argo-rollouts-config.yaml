@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argo-rollouts-config
+data:
+  # The running container has the binary file baked in it, but the setup can be done with init container, or http:// location
+  stepPlugins: |-
+    - name: "step/e2e-test" # name of the plugin, it must match the name required by the plugin so it can find it's configuration
+      location: "file://plugin-bin/e2e-step-plugin" # supports http(s):// urls and file://
+      disabled: false
+    - name: "step/e2e-test-disabled" # name of the plugin, it must match the name required by the plugin so it can find it's configuration
+      location: "file://plugin-bin/e2e-step-plugin" # supports http(s):// urls and file://
+      disabled: true
