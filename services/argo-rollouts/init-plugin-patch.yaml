@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argo-rollouts
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: install-e2e-step-plugin
+          image: quay.io/argoprojlabs/rollouts-plugins/argo-rollouts-step-plugin-installer:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              # copy binary from image path to the shared volume
+              cp -v /plugin-bin/e2e-step-plugin /mnt/plugin-bin/e2e-step-plugin
+          volumeMounts:
+            - name: plugin-bin
+              mountPath: /mnt/plugin-bin
+      containers:
+        - name: argo-rollouts
+          volumeMounts:
+            - name: plugin-bin
+              mountPath: /home/argo-rollouts/plugin-bin
+      volumes:
+        - name: plugin-bin
+          emptyDir: {}
