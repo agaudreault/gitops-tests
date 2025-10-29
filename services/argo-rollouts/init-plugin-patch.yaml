@@ -19,11 +19,10 @@ spec:
             - name: plugin-bin
               mountPath: /mnt/plugin-bin
       containers:
-        - name: rollouts-controller
+        - name: argo-rollouts
           volumeMounts:
             - name: plugin-bin
-              mountPath: /plugin-bin
-              readOnly: true
+              mountPath: /home/argo-rollouts/plugin-bin
       volumes:
         - name: plugin-bin
           emptyDir: {}
