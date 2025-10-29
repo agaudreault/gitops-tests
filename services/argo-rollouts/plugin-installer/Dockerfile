@@ -18,5 +18,21 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -gcflags="all=-
 # Final stage
 FROM alpine:3.19
 
-# Copy the plugin binary from builder
-COPY --from=builder /plugin-bin/e2e-step-plugin /plugin-bin/e2e-step-plugin
+# Create a non-root user and group for running the container
+RUN addgroup -g 1000 plugin && \
+    adduser -D -u 1000 -G plugin -h /home/plugin -s /sbin/nologin plugin && \
+    mkdir -p /plugin-bin && chown plugin:plugin /plugin-bin && chmod 0755 /plugin-bin
+
+# Copy the plugin binary from builder and set ownership to the non-root user
+# Use --chown so the binary is writable/executable by the non-root user
+COPY --from=builder --chown=plugin:plugin /plugin-bin/e2e-step-plugin /plugin-bin/e2e-step-plugin
+
+# Ensure the binary is executable
+RUN chmod 0755 /plugin-bin/e2e-step-plugin
+
+# Run as non-root user by default
+USER 1000
+
+# Default command does nothing by design; the container image is an "installer" that
+# can be run to extract the binary into a mounted volume. Keep behaviour minimal so
+# callers can mount volumes at /plugin-bin or invoke the binary directly.
