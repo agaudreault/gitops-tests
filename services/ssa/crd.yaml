@@ -1,0 +1,32 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: myresources.example.com
+spec:
+  group: example.com
+  names:
+    plural: myresources
+    singular: myresource
+    kind: MyResource
+    shortNames:
+      - mr
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                myAtomicMap:
+                  type: object
+                  x-kubernetes-map-type: 'atomic' # This makes the entire myAtomicMap object atomic
+                  properties:
+                    key1:
+                      type: string
+                    key2:
+                      type: integer
