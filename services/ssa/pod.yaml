@@ -2,5 +2,4 @@ apiVersion: example.com/v1
 kind: MyResource
 metadata:
   name: my-sample
-spec:
-  myAtomicMap: {}
+spec: {}

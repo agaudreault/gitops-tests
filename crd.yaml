@@ -24,7 +24,6 @@ spec:
               properties:
                 myAtomicMap:
                   type: object
-                  nullable: true
                   x-kubernetes-map-type: 'atomic' # This makes the entire myAtomicMap object atomic
                   properties:
                     key1:
