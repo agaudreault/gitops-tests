@@ -3,6 +3,4 @@ kind: MyResource
 metadata:
   name: my-sample
 spec:
-  myAtomicMap:
-    key1: 'value'
-    key2: 42
+  myAtomicMap: null
