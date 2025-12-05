@@ -4,13 +4,15 @@ metadata:
   name: step-plugin
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
+  finalizers: 
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: dev
     name: dev
   project: tests
   source:
-    path: services/rollout-step-plugin
+    path: services/finalizer
     repoURL: https://github.com/agaudreault/gitops-tests
     targetRevision: main
   syncPolicy:
