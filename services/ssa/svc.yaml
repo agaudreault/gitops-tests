@@ -4,6 +4,7 @@ metadata:
   name: test
   labels:
     app.kubernetes.io/component: service
+    test: value
 spec:
   type: ClusterIP
   ports:
