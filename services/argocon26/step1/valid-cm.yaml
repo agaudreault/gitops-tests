@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-config
+  namespace: kubecon26
+data:
+  color: blue
