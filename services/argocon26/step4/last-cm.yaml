@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: last-config
+  namespace: argocon26
+  annotations:
+    argocd.argoproj.io/sync-wave: '100'
+data:
+  color: blue

@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: smoke-tests
+  annotations:
+    argocd.argoproj.io/hook: PostSync # Specifies the hook type
+    # Automatically delete the Job after it succeeds
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  backoffLimit: 0 # Do not retry on failure
+  template:
+    spec:
+      containers:
+        - name: wait
+          image: busybox
+          command: ['sh', '-c', 'true']
+      restartPolicy: Never
