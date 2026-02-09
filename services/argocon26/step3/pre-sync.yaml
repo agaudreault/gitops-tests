@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: schema-migrate- # Use generateName to ensure a unique name for each run
+  annotations:
+    argocd.argoproj.io/hook: PreSync # Specifies the hook type
+    # Automatically delete the Job after it succeeds to prevent clutter
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  template:
+    spec:
+      containers:
+        - name: wait
+          image: busybox
+          command: ['sh', '-c', 'sleep 10']
+      restartPolicy: Never
