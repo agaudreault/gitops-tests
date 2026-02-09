@@ -12,5 +12,5 @@ spec:
       containers:
         - name: wait
           image: busybox
-          command: ['sh', '-c', 'sleep 10']
+          command: ['sh', '-c', 'false']
       restartPolicy: Never
