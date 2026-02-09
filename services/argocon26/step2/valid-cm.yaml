@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: example-config
-  namespace: argocon26
-  annotations:
-    argocd.argoproj.io/sync-options: PruneLast=true,Prune=confirm
-data:
-  color: blue
