@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: analyze-failure- # Use generateName to ensure a unique name for each run
+  name: analyze-failure # Use generateName to ensure a unique name for each run
   annotations:
     argocd.argoproj.io/hook: SyncFail # Specifies the hook type
     # Automatically delete the Job after it succeeds to prevent clutter

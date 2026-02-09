@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: smoke-tests-
+  name: smoke-tests
   annotations:
     argocd.argoproj.io/hook: PostSync # Specifies the hook type
     # Automatically delete the Job after it succeeds
