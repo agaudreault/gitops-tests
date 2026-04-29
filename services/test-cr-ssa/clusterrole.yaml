@@ -1,0 +1,15 @@
+### Apply this resource with the aggregationRule first manually
+# kubectl apply --server-side -f clusterrole.yaml --field-manager='test'
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: admin-test
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-test1-admin: "true"
+
+### Removing aggregationRule to test if SSA will preserve them
+# aggregationRule:
+#   clusterRoleSelectors:
+#     - matchLabels:
+#         rbac.authorization.k8s.io/aggregate-to-test1-admin: "true"
