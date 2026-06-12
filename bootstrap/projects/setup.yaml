@@ -3,8 +3,6 @@ kind: AppProject
 metadata:
   name: setup
   namespace: argocd
-  labels:
-    argocd.argoproj.io/project-inherit: global
 spec:
   description: Project used to init the cluster resources
   destinations:
@@ -13,3 +11,13 @@ spec:
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceBlacklist:
+    - group: argoproj.io
+      kind: 'Application'
+    - group: argoproj.io
+      kind: 'ApplicationSet'
+  sourceRepos:
+    - 'https://github.com/agaudreault/gitops-tests'
