@@ -1,0 +1,21 @@
+{{- range $i := until (.Values.counts.appProjects | int) }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: fake-project-{{ $i }}
+  namespace: {{ $.Values.namespace }}
+spec:
+  description: Fake project {{ $i }} for testing
+  sourceRepos:
+    - 'invalid'
+  destinations:
+    - namespace: '*'
+      server: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+{{- end }}

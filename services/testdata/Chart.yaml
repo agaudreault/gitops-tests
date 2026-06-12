@@ -1,0 +1,12 @@
+apiVersion: v2
+name: argo-cd-testdata
+description: A Helm chart to generate fake Argo CD test data for local development
+type: application
+version: 0.1.0
+appVersion: "1.0"
+keywords:
+  - argocd
+  - testing
+  - testdata
+maintainers:
+  - name: agaudreault

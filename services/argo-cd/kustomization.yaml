@@ -9,6 +9,8 @@ patches:
   - path: ./patch/config/argocd-cm.yaml
   - path: ./patch/config/argocd-cmd-params-cm.yaml
   - path: ./patch/config/argocd-rbac-cm.yaml
+  - path: ./patch/testdata/argocd-cm-accounts.yaml
+  - path: ./patch/testdata/argocd-gpg-keys-cm.yaml
 
 images:
   - name: quay.io/argoproj/argocd

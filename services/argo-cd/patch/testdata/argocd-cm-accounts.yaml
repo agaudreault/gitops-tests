@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+data:
+  # Login only (0-19)
+  accounts.fake-user-0: login
+  accounts.fake-user-1: login
+  accounts.fake-user-2: login
+  accounts.fake-user-3: login
+  accounts.fake-user-4: login
+  accounts.fake-user-5: login
+  accounts.fake-user-6: login
+  accounts.fake-user-7: login
+  accounts.fake-user-8: login
+  accounts.fake-user-9: login
+  accounts.fake-user-10: login
+  accounts.fake-user-11: login
+  accounts.fake-user-12: login
+  accounts.fake-user-13: login
+  accounts.fake-user-14: login
+  accounts.fake-user-15: login
+  accounts.fake-user-16: login
+  accounts.fake-user-17: login
+  accounts.fake-user-18: login
+  accounts.fake-user-19: login
+  
+  # apiKey only (20-39)
+  accounts.fake-user-20: apiKey
+  accounts.fake-user-21: apiKey
+  accounts.fake-user-22: apiKey
+  accounts.fake-user-23: apiKey
+  accounts.fake-user-24: apiKey
+  accounts.fake-user-25: apiKey
+  accounts.fake-user-26: apiKey
+  accounts.fake-user-27: apiKey
+  accounts.fake-user-28: apiKey
+  accounts.fake-user-29: apiKey
+  accounts.fake-user-30: apiKey
+  accounts.fake-user-31: apiKey
+  accounts.fake-user-32: apiKey
+  accounts.fake-user-33: apiKey
+  accounts.fake-user-34: apiKey
+  accounts.fake-user-35: apiKey
+  accounts.fake-user-36: apiKey
+  accounts.fake-user-37: apiKey
+  accounts.fake-user-38: apiKey
+  accounts.fake-user-39: apiKey
+  
+  # Both apiKey and login (40-59)
+  accounts.fake-user-40: apiKey, login
+  accounts.fake-user-41: apiKey, login
+  accounts.fake-user-42: apiKey, login
+  accounts.fake-user-43: apiKey, login
+  accounts.fake-user-44: apiKey, login
+  accounts.fake-user-45: apiKey, login
+  accounts.fake-user-46: apiKey, login
+  accounts.fake-user-47: apiKey, login
+  accounts.fake-user-48: apiKey, login
+  accounts.fake-user-49: apiKey, login
+  accounts.fake-user-50: apiKey, login
+  accounts.fake-user-51: apiKey, login
+  accounts.fake-user-52: apiKey, login
+  accounts.fake-user-53: apiKey, login
+  accounts.fake-user-54: apiKey, login
+  accounts.fake-user-55: apiKey, login
+  accounts.fake-user-56: apiKey, login
+  accounts.fake-user-57: apiKey, login
+  accounts.fake-user-58: apiKey, login
+  accounts.fake-user-59: apiKey, login

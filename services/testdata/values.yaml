@@ -1,0 +1,19 @@
+namespace: argocd
+
+counts:
+  appProjects: 50
+  clusters: 50
+  gitReposRead: 10
+  helmReposRead: 10
+  ociReposRead: 5
+  gitReposWrite: 25
+  gitCredsRead: 10
+  helmCredsRead: 10
+  ociCredsRead: 10
+  gitCredsWrite: 20
+
+# Configurable base domains for variety
+clusterDomain: 'example.com'
+gitRepoBase: 'github.com/fake-org'
+helmRepoBase: 'charts.example.com/fake-org'
+ociRepoBase: 'registry.example.com/fake-org'

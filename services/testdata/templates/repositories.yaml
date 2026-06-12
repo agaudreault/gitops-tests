@@ -1,0 +1,79 @@
+{{- /* Git HTTPS Read Repositories (10) */ -}}
+{{- range $i := until (.Values.counts.gitReposRead | int) }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fake-repo-git-read-{{ $i }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  type: git
+  url: https://{{ $.Values.gitRepoBase }}/fake-repo-git-read-{{ $i }}
+  username: fake-user-{{ $i }}
+  password: fake-password-{{ randAlphaNum 16 }}
+{{- end }}
+
+{{- /* Helm HTTPS Read Repositories (10) */ -}}
+{{- range $i := until (.Values.counts.helmReposRead | int) }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fake-repo-helm-read-{{ $i }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  type: helm
+  name: fake-helm-{{ $i }}
+  url: https://{{ $.Values.helmRepoBase }}-{{ $i }}
+  username: fake-user-{{ $i }}
+  password: fake-password-{{ randAlphaNum 16 }}
+{{- end }}
+
+{{- /* OCI Read Repositories (5) */ -}}
+{{- range $i := until (.Values.counts.ociReposRead | int) }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fake-repo-oci-read-{{ $i }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  type: helm
+  name: fake-oci-{{ $i }}
+  url: {{ $.Values.ociRepoBase }}-{{ $i }}
+  enableOCI: "true"
+  username: fake-user-{{ $i }}
+  password: fake-password-{{ randAlphaNum 16 }}
+{{- end }}
+
+{{- /* Git SSH Write Repositories (25) */ -}}
+{{- range $i := until (.Values.counts.gitReposWrite | int) }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fake-repo-git-write-{{ $i }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  type: git
+  url: git@github.com:fake-org/fake-repo-git-write-{{ $i }}.git
+  sshPrivateKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+    QyNTUxOQAAACBGYWtlS2V5RGF0YUZvclRlc3RpbmdPbmx5Tm90UmVhbAAAAEBGYWtlS2V5
+    RGF0YUZvclRlc3RpbmdPbmx5Tm90UmVhbEZha2VLZXlEYXRhRm9yVGVzdGluZ09ubHlOb3
+    RSZWFsAAAAE2Zha2Utc3NoLWtleS13cml0ZS0wAQIDBAUGBwg=
+    -----END OPENSSH PRIVATE KEY-----
+{{- end }}

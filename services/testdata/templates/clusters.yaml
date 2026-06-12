@@ -1,0 +1,21 @@
+{{- range $i := until (.Values.counts.clusters | int) }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fake-cluster-{{ $i }}-secret
+  namespace: {{ $.Values.namespace }}
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+type: Opaque
+stringData:
+  name: fake-cluster-{{ $i }}
+  server: https://fake-cluster-{{ $i }}.{{ $.Values.clusterDomain }}:6443
+  config: |
+    {
+      "bearerToken": "fake-token-{{ $i }}-{{ randAlphaNum 32 }}",
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }
+{{- end }}
