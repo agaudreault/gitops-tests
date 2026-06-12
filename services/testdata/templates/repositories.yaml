@@ -64,7 +64,7 @@ metadata:
   name: fake-repo-git-write-{{ $i }}
   namespace: {{ $.Values.namespace }}
   labels:
-    argocd.argoproj.io/secret-type: repository
+    argocd.argoproj.io/secret-type: repository-write
 type: Opaque
 stringData:
   type: git
